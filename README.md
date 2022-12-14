@@ -1,3 +1,5 @@
+[![Deploy to AWS Lambda](https://github.com/marktanrj/fast-and-furious-bot/actions/workflows/deploy.yml/badge.svg)](https://github.com/marktanrj/fast-and-furious-bot/actions/workflows/deploy.yml)
+
 # Fast And Furious Bot
 
 Generates Fast and Furious style titles with given inputs using a Telegram Bot @fastfufubot
