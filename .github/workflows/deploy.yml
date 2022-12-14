@@ -1,0 +1,51 @@
+name: Deploy to AWS Lambda
+
+on:
+  push:
+      branches:
+        - master
+
+jobs:
+  deploy_source:
+    name: build and deploy lambda
+    environment: Deployment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: yarn install and build
+        working-directory: ./apps/server
+        run: |
+          yarn install
+          yarn build
+        env:
+          CI: true
+
+      - name: Zip build
+        uses: thedoctor0/zip-release@main
+        with:
+          path: index.js
+          filename: index.zip
+          directory: ./apps/server/dist
+
+      - name: Deploy
+        uses: appleboy/lambda-action@master
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_region: ap-southeast-1
+          function_name: wen-meet-bot
+          zip_file: ./apps/server/dist/index.zip
+
+      - name: Set telegram bot webhook
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: ${{ secrets.TELEGRAM_BOT_WEBHOOK_URL }}
+          method: 'POST'
+          data: '{"url": "${{ secrets.SERVER_URL }}"}'
