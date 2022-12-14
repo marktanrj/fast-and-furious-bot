@@ -55,14 +55,14 @@ const inlineQuery = Composer.on('inline_query', async (ctx: any) => {
     ctx.telegram.answerInlineQuery(ctx.inlineQuery.id, [
       {
         type: 'article',
-        id: new Date().toString(),
+        id: text,
         title: text,
         input_message_content: {
           message_text: message,
         },
       },
     ], {
-      cache_time: 1,
+      cache_time: 20,
     });
 
   } catch (error: any) {
