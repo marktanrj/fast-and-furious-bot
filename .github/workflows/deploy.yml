@@ -25,7 +25,7 @@ jobs:
           version: 6.0.2
 
       - name: pnpm install and build
-        working-directory: ./apps/server
+        working-directory: .
         run: |
           pnpm install
           pnpm build
@@ -37,7 +37,7 @@ jobs:
         with:
           path: index.js
           filename: index.zip
-          directory: ./apps/server/dist
+          directory: ./dist
 
       - name: Deploy
         uses: appleboy/lambda-action@master
@@ -46,7 +46,7 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: ap-southeast-1
           function_name: wen-meet-bot
-          zip_file: ./apps/server/dist/index.zip
+          zip_file: ./dist/index.zip
 
       - name: Set telegram bot webhook
         uses: fjogeleit/http-request-action@v1
