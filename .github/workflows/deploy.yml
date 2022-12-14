@@ -19,11 +19,11 @@ jobs:
         with:
           node-version: 16
 
-      - name: yarn install and build
+      - name: pnpm install and build
         working-directory: ./apps/server
         run: |
-          yarn install
-          yarn build
+          pnpm install
+          pnpm build
         env:
           CI: true
 
