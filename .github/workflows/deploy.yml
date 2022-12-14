@@ -8,7 +8,7 @@ on:
 jobs:
   deploy_source:
     name: build and deploy lambda
-    environment: Deployment
+    environment: Deploy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
