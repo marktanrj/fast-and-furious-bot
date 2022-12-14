@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon ./src/index.ts",
-    "build": "webpack",
-    "start": "NODE_ENV=development node ./dist/index.js"
+    "build": "webpack"
   },
   "keywords": [],
   "author": "",
