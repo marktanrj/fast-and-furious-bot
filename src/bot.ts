@@ -12,7 +12,7 @@ const startCommand = Composer.command(['/start', '/help'], async (ctx: any) => {
   const msg = `
 Hello, this bot helps you write a title following fast & furious naming scheme
 
-Example: /ff <title1> <title2>
+Example: /ff <title1> <title2> <Replace Tokyo Drift desc>
 
 Naming scheme:
   The Fast and the Furious
