@@ -1,9 +1,12 @@
 const path = require('path');
-require('dotenv').config({ path: path.resolve(__dirname, '../.local.env') });
+import { isProductionEnv } from './utils/isProductionEnv';
+
+if (!isProductionEnv) {
+  require('dotenv').config({ path: path.resolve(__dirname, '../.local.env') });
+}
 
 import serverless from 'serverless-http';
 import { createApp } from './app';
-import { isProductionEnv } from './utils/isProductionEnv';
 
 (async () => {
   if (!isProductionEnv) {
