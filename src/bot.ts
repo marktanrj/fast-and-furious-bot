@@ -93,7 +93,6 @@ async function validateCommandInput(ctx: any) {
   const text = ctx.message.text;
   const args = text.split(' ');
   if (args.length < 3) {
-    await ctx.reply('Need 2 arguments');
     throw new Error('Need 2 arguments');
   }
 }
