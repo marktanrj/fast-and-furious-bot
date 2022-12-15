@@ -3,7 +3,7 @@ import { Composer } from 'telegraf';
 
 type ProcessedInputs = {
   title1: string,
-  title1Letter: string,
+  title2Letter: string,
   title2: string,
   title3: string,
 }
@@ -12,7 +12,11 @@ const startCommand = Composer.command(['/start', '/help'], async (ctx: any) => {
   const msg = `
 Hello, this bot helps you write a title following fast & furious naming scheme
 
-Example: /ff <title1> <title2> <Replace Tokyo Drift desc>
+Example:
+/ff <title1> <title2> <replace Tokyo Drift>
+
+Inline query:
+@fastfufubot <title1> <title2> <replace Tokyo Drift>
 
 Naming scheme:
   The Fast and the Furious
@@ -97,8 +101,8 @@ async function validateCommandInput(ctx: any) {
 function inputParser(text: string) {
   const args = text.split(' ');
   const title1 = capitalizeFirstLetter(args[1]);
-  const title1Letter = title1[0];
   const title2 = capitalizeFirstLetter(args[2]);
+  const title2Letter = title2[0];
 
   let title3 = 'Tokyo Drift';
   if (args.length > 3) {
@@ -107,7 +111,7 @@ function inputParser(text: string) {
 
   return {
     title1,
-    title1Letter,
+    title2Letter,
     title2,
     title3
   }
@@ -115,7 +119,7 @@ function inputParser(text: string) {
 
 function formatMessage({
   title1,
-  title1Letter,
+  title2Letter,
   title2,
   title3
 }: ProcessedInputs) {
@@ -128,7 +132,7 @@ ${title1} Five
 ${title1} & ${title2} 6
 ${title2} 7
 The Fate of the ${title2}
-${title1Letter}9
+${title2Letter}9
 ${title1} X`
 
   return msg;
