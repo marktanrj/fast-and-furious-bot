@@ -51,6 +51,13 @@ jobs:
       - name: Set telegram bot webhook
         uses: fjogeleit/http-request-action@v1
         with:
-          url: ${{ secrets.TELEGRAM_BOT_WEBHOOK_URL }}
+          url: ${{ format('https://api.telegram.org/bot{0}/setWebhook', secrets.TELEGRAM_BOT_TOKEN) }}
           method: 'POST'
           data: '{"url": "${{ secrets.SERVER_URL }}"}'
+      
+      - name: Notify
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: ${{ format('https://api.telegram.org/bot{0}/sendMessage', secrets.TELEGRAM_BOT_TOKEN) }}
+          method: 'POST'
+          data: '{"chat_id": "${{ secrets.ownerChatId }}", "text": "Bot updated"}'
